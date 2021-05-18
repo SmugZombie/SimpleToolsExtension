@@ -1,0 +1,13 @@
+{
+    "manifest_version": 2,
+    "name": "SimpleTools Plugin",
+    "description": "Adds super simple tools to your fingertips",
+    "version": "1.0",
+    "browser_action": {
+     "default_icon": "./assets/icon.png",
+     "default_popup": "popup.html"
+    },
+    "permissions": [
+     "activeTab"
+     ]
+  }
