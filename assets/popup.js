@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     generateMD5();    
     generateGUID("guid1");
     generateGUID("guid2");
-    generateGUID("guid3");
+    generateGUID("guid3", true);
     dinoPass();
     $("#sha").val(sha256(Date.now()));
 }, false);
@@ -29,16 +29,29 @@ function copyText(e){
   document.execCommand("copy");
 }
 
-function generateMD5(){
-    $.get( "https://playground.alreadydev.com/simpletools/md5.php", function( data ) {
-        $("#md5").val(data);
-      });
+function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
 }
 
-function generateGUID(where){
-    $.get( "https://guid.wtf/guid.php", function( data ) {
+function generateMD5(){
+    /*$.get( "https://playground.alreadydev.com/simpletools/md5.php", function( data ) {
+        $("#md5").val(data);
+      });*/
+      $("#md5").val(md5(uuidv4() + Date.now()));
+}
+
+function generateGUID(where, uppercase=false){
+    /*$.get( "https://guid.wtf/guid.php", function( data ) {
         $("#" + where).val(data);
-      });
+      });*/
+      if(uppercase){
+      	$("#" + where).val(uuidv4().toUpperCase());
+      }else{
+      	$("#" + where).val(uuidv4());
+      }
+      
 }
 
 function dinoPass(){
